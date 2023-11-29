@@ -1,10 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package babythistime;
-import javax.swing.JOptionPane;
+
+    import javax.swing.JOptionPane;
 /**
  *
  * @author Gonzales_CPE
@@ -12,6 +7,7 @@ import javax.swing.JOptionPane;
 public class BabythisTIME {
     private static final String[] item = {"PABO", "Gansa", "PATO", "MANOK", "PUGO"};
     private static final double[] price = {10.0, 20.0, 30.0, 40.0, 50.0};
+    
 
     /**
      * @param args the command line arguments
@@ -21,6 +17,7 @@ public class BabythisTIME {
         int choice;
         int quantity;
         double total = 0.0;
+        
         
         do {
             choice = showMenu();
@@ -38,10 +35,32 @@ public class BabythisTIME {
             }
         } while (true);
         
-        double dscnt = applyDiscount(total);
-        double csh = total - dscnt;
+        double dscnt = total *0.5;
+        double csh = total-dscnt;
+        int dsct = JOptionPane.showConfirmDialog(null, "Sexy ka o dili?", "Question", JOptionPane.YES_NO_OPTION);
+        if (dsct == JOptionPane.YES_OPTION){
+            JOptionPane.showMessageDialog(null, "Total: "+ csh + "\nDiscount Applied: 5%");
+        }else{
+            JOptionPane.showMessageDialog(null, "Total : "+total+ "\nNo Discount Applied");
+        }
         
-        JOptionPane.showMessageDialog(null, String.format("Total: P%.2f\nDiscount: $%.2f\nTotal Amount: P%.2f", total, dscnt, csh), "Order Summary", JOptionPane.INFORMATION_MESSAGE);
+        
+        while(true){
+        String input = JOptionPane.showInputDialog(null, "Your total is " + total + "\nEnter Cash: " );
+        int ipt = Integer.parseInt(input);
+        double b = ipt-csh;
+        if(ipt > csh){
+            JOptionPane.showMessageDialog(null, "Your change is: " +b );
+            JOptionPane.showMessageDialog(null, "Salamat sa pag palit boss");
+            break;
+        } else if( ipt == csh){
+            JOptionPane.showMessageDialog(null, "Thank you for your payment");
+            JOptionPane.showMessageDialog(null, "Salamat sa pag palit boss");
+            break;
+        }else{
+            JOptionPane.showMessageDialog(null, "INAVLID! Please Enter Cash Again.");
+        }
+        }
     }
     
     private static int showMenu() {
@@ -75,15 +94,17 @@ public class BabythisTIME {
         return price[choice] * quantity;
     }
     
-    private static double applyDiscount(double total) {
-        String discountString = JOptionPane.showInputDialog(null, "Discount Percentage:", "Discount", JOptionPane.QUESTION_MESSAGE);
+    //private static double applyDiscount(double total) {
+       // String discountString = JOptionPane.showInputDialog(null, "Discount Percentage:", "Discount", JOptionPane.QUESTION_MESSAGE);
         
-        try {
-            double dscntt = Double.parseDouble(discountString);
-            return total * (dscntt / 100.0);
-        } catch (NumberFormatException e) {
-            return 0.0;
-        }
-    }
+       // try {
+          //  double dscntt = Double.parseDouble(discountString);
+         //   return total * (dscntt / 100.0);
+        //} catch (NumberFormatException e) {
+         //   return 0.0;
+       // }
+   // }
     
+}
+
 }
